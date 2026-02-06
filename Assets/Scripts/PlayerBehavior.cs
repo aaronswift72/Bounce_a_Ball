@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
 
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Slider jumpChargeSlider;
 
     public float speed = 8f;
 
@@ -59,6 +61,7 @@ public class PlayerBehavior : MonoBehaviour
             isCharging = true;
             currentJumpForce += chargeRate * Time.deltaTime;
             currentJumpForce = Mathf.Clamp(currentJumpForce, 0f, maxJumpForce);
+            jumpChargeSlider.value = currentJumpForce;
         }
         // Releasing Jump
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && isCharging && isGrounded)
@@ -68,6 +71,7 @@ public class PlayerBehavior : MonoBehaviour
             currentJumpForce = 0f;
             isCharging = false;
             isGrounded = false;
+            jumpChargeSlider.value = 0f;
         }
     }
     void FixedUpdate()

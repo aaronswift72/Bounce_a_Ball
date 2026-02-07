@@ -1947,7 +1947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehavior
   cameraTransform: {fileID: 330585546}
   jumpChargeSlider: {fileID: 1010874824}
-  speed: 5
+  speed: 4
   maxJumpForce: 25
   chargeRate: 15
   minJumpForce: 12

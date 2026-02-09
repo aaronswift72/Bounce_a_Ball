@@ -8,7 +8,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Slider jumpChargeSlider;
 
-    public float speed = 8f;
+    public float speed = 5f;
 
     public float maxJumpForce = 25f;
     public float chargeRate = 30f;
@@ -27,6 +27,13 @@ public class PlayerBehavior : MonoBehaviour
     public float maxSpeed = 6f;
     public float groundDrag = 3f;
     public float airDrag = 0.5f;
+
+    public float speedMultiplier = 1f;
+
+    public int LastDirection { get; private set; } = 1;
+    public float CameraRelativeX { get; private set; }
+
+    private Vector3 currentMove = Vector3.zero;
      
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,6 +73,12 @@ public class PlayerBehavior : MonoBehaviour
         // Releasing Jump
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && isCharging && isGrounded)
         {
+    
+            if (Mathf.Abs(currentMove.x) > 0.01f)
+            {
+                LastDirection = currentMove.x > 0 ? 1 : -1;
+            }
+
             float finalJumpForce = Mathf.Max(currentJumpForce, minJumpForce);
             rb.AddForce(Vector3.up * finalJumpForce, ForceMode.Impulse);
             currentJumpForce = 0f;
@@ -96,9 +109,11 @@ public class PlayerBehavior : MonoBehaviour
         camRight.Normalize();
 
         Vector3 move = (camForward * input.z + camRight * input.x).normalized;
+        currentMove = move;
+        float finalSpeed = speed * speedMultiplier;
 
         // Apply movement
-        rb.MovePosition(rb.position + move * speed * Time.deltaTime);
+        rb.MovePosition(rb.position + move * finalSpeed * Time.deltaTime);
 
         // Better Gravity
         if (rb.linearVelocity.y < 0)
@@ -122,5 +137,12 @@ public class PlayerBehavior : MonoBehaviour
 
         // Drag Controls Sliding
         rb.linearDamping = isGrounded ? groundDrag : airDrag;
+
+        // Update facing based on horizontal movement
+        if (Mathf.Abs(move.x) > 0.01f)
+        {
+            LastDirection = move.x > 0 ? 1 : -1;
+        }
+        CameraRelativeX = move.x;
     }
 }

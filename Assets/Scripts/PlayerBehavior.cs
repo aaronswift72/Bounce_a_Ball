@@ -65,15 +65,22 @@ public class PlayerBehavior : MonoBehaviour
         // Charging Jump
         if (Keyboard.current.spaceKey.isPressed && isGrounded)
         {
+            if(!isCharging)
+            {
+                AudioManager.instance.StartJumpCharge();
+            }
             isCharging = true;
             currentJumpForce += chargeRate * Time.deltaTime;
             currentJumpForce = Mathf.Clamp(currentJumpForce, 0f, maxJumpForce);
             jumpChargeSlider.value = currentJumpForce;
+            
         }
         // Releasing Jump
         if (Keyboard.current.spaceKey.wasReleasedThisFrame && isCharging && isGrounded)
         {
-    
+            
+            AudioManager.instance.StopJumpCharge();
+            AudioManager.instance.PlayJump();
             if (Mathf.Abs(currentMove.x) > 0.01f)
             {
                 LastDirection = currentMove.x > 0 ? 1 : -1;
@@ -85,6 +92,11 @@ public class PlayerBehavior : MonoBehaviour
             isCharging = false;
             isGrounded = false;
             jumpChargeSlider.value = 0f;
+        }
+        if (!Keyboard.current.spaceKey.isPressed && isCharging)
+        {
+            AudioManager.instance.StopJumpCharge();
+            isCharging = false;
         }
     }
     void FixedUpdate()

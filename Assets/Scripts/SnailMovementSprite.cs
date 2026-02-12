@@ -125,6 +125,7 @@ public class SnailMovementSprite : MonoBehaviour
         {
             if (Mathf.Abs(maxDownVelocity) >= hardLandFallSpeed)
             {
+                AudioManager.instance.PlaySplat();
                 landingTimer = hardLandDuration;
                 slowdownTimer = landingRecoveryTime;
 

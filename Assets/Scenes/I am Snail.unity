@@ -3362,15 +3362,18 @@ MonoBehaviour:
   jumpCharge: {fileID: 8300000, guid: 2aea5f90fe20f4489a12d3eed740cb50, type: 3}
   jump: {fileID: 0}
   snailTheme: {fileID: 8300000, guid: 906ea0bc13ac94ea5b354d20613f8246, type: 3}
-  splat: {fileID: 0}
+  splat1: {fileID: 8300000, guid: 76835bf4d327640009245cecc3f656ed, type: 3}
+  splat2: {fileID: 8300000, guid: 6ba8a204f40824cf3a045bbecfd48b54, type: 3}
+  splat3: {fileID: 8300000, guid: 7c06b972ec14a4b05a4614f473e14bc3, type: 3}
+  splat4: {fileID: 8300000, guid: b0911af85edfd45978cfd8880a054c1e, type: 3}
   musicSource: {fileID: 90978719}
   windSource: {fileID: 361591980}
   birdsSource: {fileID: 633882474}
   jumpSource: {fileID: 1089428861}
   coinSource: {fileID: 864321195}
   sfxVolume: 1
-  musicVolume: 0.7
-  ambienceVolume: 0.174
+  musicVolume: 0.404
+  ambienceVolume: 0.1
   musicStartDelay: 1
   ambienceStartDelay: 1
 --- !u!4 &1062371572

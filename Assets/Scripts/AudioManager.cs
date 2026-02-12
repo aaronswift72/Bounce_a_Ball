@@ -14,7 +14,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip jump;
     //public AudioClip shimmer;
     public AudioClip snailTheme;
-    public AudioClip splat;
+    public AudioClip splat1;
+    public AudioClip splat2;
+    public AudioClip splat3;
+    public AudioClip splat4;
+
+
+
 
     [Header("Audio Sources")]
     public AudioSource musicSource;         // For Snail Theme
@@ -24,7 +30,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource coinSource;          // For coin collect
 
     [Header("Volume Settings")]
-    [Range(0f, 1f)] public float sfxVolume = 1f;
+    [Range(0f, 1f)] public float sfxVolume = 1.3f;
     [Range(0f, 1f)] public float musicVolume = 0.7f;
     [Range(0f, 1f)] public float ambienceVolume = 0.1f;
 
@@ -52,8 +58,9 @@ public class AudioManager : MonoBehaviour
         musicSource.volume = musicVolume;
         windSource.volume = ambienceVolume;
         birdsSource.volume = ambienceVolume;
-        jumpSource.volume = sfxVolume;
-        coinSource.volume = sfxVolume * 0.6f;
+        jumpSource.volume = 0.25f;
+        coinSource.volume = sfxVolume * 0.5f;
+    
 
         // Start sounds with delays
         Invoke(nameof(StartMusic), musicStartDelay);
@@ -144,9 +151,26 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySplat()
 {
-    if (splat != null)
+    int randomIndex = Random.Range(0, 4);
+    AudioClip splatSound = null;
+    switch (randomIndex)
+        {
+            case 0:
+                splatSound = splat1;
+                break;
+            case 1:
+                splatSound = splat2;
+                break;
+            case 2:
+                splatSound = splat3;
+                break;
+            case 3:
+                splatSound = splat4;
+                break;
+        }
+    if (splatSound != null)
     {
-        jumpSource.PlayOneShot(splat, sfxVolume);
+        jumpSource.PlayOneShot(splatSound, sfxVolume * 2);
     }
 }
 }

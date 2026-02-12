@@ -129,7 +129,7 @@ public class AudioManager : MonoBehaviour
         if (jumpCharge != null && !jumpSource.isPlaying)
         {
             jumpSource.clip = jumpCharge;
-            jumpSource.loop = true;
+            jumpSource.loop = false;
             jumpSource.Play();
         }
     }

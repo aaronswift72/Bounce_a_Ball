@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
         windSource.volume = ambienceVolume;
         birdsSource.volume = ambienceVolume;
         jumpSource.volume = 0.25f;
-        coinSource.volume = sfxVolume * 0.5f;
+        coinSource.volume = sfxVolume * 0.4f;
     
 
         // Start sounds with delays
@@ -170,7 +170,7 @@ public class AudioManager : MonoBehaviour
         }
     if (splatSound != null)
     {
-        jumpSource.PlayOneShot(splatSound, sfxVolume * 2);
+        jumpSource.PlayOneShot(splatSound, sfxVolume);
     }
 }
 }
